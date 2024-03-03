@@ -11,13 +11,90 @@ export const em = 'amazoncypress123@gmail.com';
 export const pswd = 'ZAQ1@wsx';
 
 export const Navigate = {
-    homePage:{
-        here(){
+    homePage: {
+        here() {
             cy.get('[id="nav-logo-sprites"]').click()
+            }
+        },
+    categoryMenu: {
+        here: () => {
+            cy.get('[data-csa-c-slot-id="HamburgerMenuDesktop"]').click()
+        },
+        category: (name) => {
+            Navigate.categoryMenu.here()
+            cy.get('.hmenu-item').contains(name).click()
+        },
+    },
+    shoppingCart: {
+        here(){
+            cy.get('[id="nav-cart"]').click()
+        }
+    },
+    deliveryLocation: {
+        here(){
+            cy.get('[id="nav-global-location-data-modal-action"]').click()
         }
     }
 }
 
-export function search(value){
-    cy.get('[id="twotabsearchtextbox"]').type(`${value}{enter}`)
+export function searchProduct(value){
+    cy.get('[id="twotabsearchtextbox"]').type(value)
+    cy.get('[id="nav-search-submit-button"]').click()
+    cy.get('[id="twotabsearchtextbox"]').type('{selectAll}{del}{esc}')
+}
+
+export function selectProduct(num){
+    cy.get('[data-cy="title-recipe"]').eq(num).click()
+
+}
+
+export function addToCart(){
+    cy.get('[id="add-to-cart-button"]').click()
+}
+
+export function getPrice(selector, price) {
+    cy.get(selector).should('be.visible');
+    cy.get(selector).invoke('text').then((value) => {
+        const cleanedPrice = value.slice().match(/\d+(\.\d+)?/);
+        cy.wrap(cleanedPrice[0]).as(price);
+    });
+}
+
+export function validateTotalPrice(itemCount, totalPriceVar) {
+    let totalPrice = 0;
+
+    // Iteruj przez elementy w koszyku
+    for (let index = 0; index < itemCount; index++) {
+        const selector = `.sc-product-price:eq(${index})`;
+        const priceVar = `price${index}`;
+
+        // Pobierz cenę dla danego elementu
+        getPrice(selector, priceVar)
+
+        // Dodaj cenę do ogólnej sumy
+        cy.get('@' + priceVar).then((itemPrice) => {
+            totalPrice += parseFloat(itemPrice.toString());
+        });
+    }
+
+    cy.get('#sc-subtotal-label-buybox').should('contain.text',`Subtotal (${itemCount} items):`)
+
+    // Pobierz cenę całego koszyka
+    cy.get('#sc-subtotal-amount-activecart').invoke('text').then((cartTotal) => {
+        const cleanedCartTotal = cartTotal.slice().match(/\d+(\.\d+)?/);
+        const adjustedTotalPrice = (totalPrice + 0.01).toFixed(2); // Dodaj 1 cent i zaokrąglij do dwóch miejsc po przecinku
+        cy.wrap(adjustedTotalPrice).as(totalPriceVar); // Aktualizuj totalPriceVar
+        expect(parseFloat(cleanedCartTotal.toString())).to.equal(parseFloat(adjustedTotalPrice));
+    });
+}
+
+export function deleteAllItemsFromCart(){
+    Navigate.shoppingCart.here()
+    cy.get('body').then((item)=>{
+        if(item.find('h1.a-spacing-top-base:contains("Your Amazon Cart is empty.")').length) {
+            return 0;
+        }else {
+            cy.get('input[data-action="delete"]').click({multiple:true,force:true})
+        }
+    })
 }
