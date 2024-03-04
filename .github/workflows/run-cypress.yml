@@ -23,6 +23,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - run: npm install
+
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
