@@ -8,8 +8,7 @@ describe('Home Page test', () => {
     })
 
     it('Should add new address and then validate it', () => {
-        addNewAddress('Poland','Jan Kowalski','111111111','2 ulica Anieli Krzywoń','test')
-        checkAddress('Poland','Jan Kowalski','111111111','2 ulica Anieli Krzywoń','test','01-391','Hrubieszów')
-
+        addNewAddress('Poland','Jan Kowalski','111111111','testowa 1','1','01-391','Warsaw')
+        checkAddress('Poland','Jan Kowalski','111111111','testowa 1','1','01-391','Warsaw')
     })
 })
