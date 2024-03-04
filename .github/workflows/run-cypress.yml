@@ -26,6 +26,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
+          working-directory: /__w/Amazon-Cypress
           browser: chrome
           config-file: cypress.config.js
           spec: ${{ steps.name.outputs.spec }}
