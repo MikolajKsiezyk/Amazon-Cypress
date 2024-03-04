@@ -39,7 +39,7 @@ export const Navigate = {
 
 export function saveCookies() {
     cy.getCookies().then((cookies)=>{
-        cy.writeFile('cypress/fixtures/cookies.json', JSON.stringify(cookies));
+        cy.writeFile('fixtures/cookies.json', JSON.stringify(cookies));
     })
 }
 
