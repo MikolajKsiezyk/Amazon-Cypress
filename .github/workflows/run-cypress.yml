@@ -23,7 +23,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - run: cd /__w/Amazon-Cypress; npm install; pwd; ls -la
+      - run: cd /__w/Amazon-Cypress; pwd; ls -la
+
+      - run: npm install;
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
