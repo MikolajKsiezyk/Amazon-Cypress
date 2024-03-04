@@ -2,11 +2,12 @@ name: Run Cypress
 
 on:
   workflow_dispatch:
-    spec:
-      description: "Test specification:"
-      type: string
-      default: 'cypress/e2e/**/*cy.js'
-      required: true
+    inputs:
+      spec:
+        description: "Test specification:"
+        type: string
+        default: 'cypress/e2e/**/*cy.js'
+        required: true
 
 jobs:
   cypress-run:
@@ -25,7 +26,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          working-directory: cypress
+          working-directory: Amazon-Cypress
           browser: chrome
           config-file: cypress.config.js
           spec: ${{ steps.name.outputs.spec }}
