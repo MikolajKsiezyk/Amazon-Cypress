@@ -9,6 +9,16 @@ module.exports = defineConfig({
     },
   },
   chromeWebSecurity: false,
+  retries: 2,
+  defaultCommandTimeout: 20000,
+  video: true,
+  videoCompression: 32,
+  screenshotOnRunFailure: true,
+  viewportWidth: 1920,
+  viewportHeight: 1080,
+  fixturesFolder:'cypress/fixtures',
+  screenshotsFolder:'cypress/screenshots',
+  videosFolder:'cypress/videos',
   e2e: {
     baseUrl: 'https://www.amazon.com',
     setupNodeEvents(on, config) {
