@@ -32,9 +32,36 @@ export const Navigate = {
     },
     deliveryLocation: {
         here(){
-            cy.get('[id="nav-global-location-data-modal-action"]').click()
+            cy.get('#nav-global-location-popover-link').click()
         }
     }
+}
+
+export function saveCookies() {
+    cy.getCookies().then((cookies)=>{
+        cy.writeFile('cypress/fixtures/cookies.json', JSON.stringify(cookies));
+    })
+}
+
+export function restoreCookies(){
+    cy.visit("https://www.amazon.com")
+    cy.fixture('cookies.json').then((cookies) => {
+        cy.clearCookies();
+
+        cookies.forEach((cookie) => {
+            const { name, value, path, secure, httpOnly, expiry, domain, sameSite } = cookie;
+            cy.setCookie(name, value, {
+                path,
+                secure,
+                httpOnly,
+                expiry,
+                domain,
+                sameSite,
+            });
+        });
+    });
+    cy.wait(3000)
+    cy.reload()
 }
 
 export function searchProduct(value){
@@ -43,8 +70,8 @@ export function searchProduct(value){
     cy.get('[id="twotabsearchtextbox"]').type('{selectAll}{del}{esc}')
 }
 
-export function selectProduct(num){
-    cy.get('[data-cy="title-recipe"]').eq(num).click()
+export function selectProduct(){
+    cy.get('[data-component-type="s-product-image"]:eq(0)').click()
 
 }
 
@@ -82,8 +109,8 @@ export function validateTotalPrice(itemCount, totalPriceVar) {
     // Pobierz cenę całego koszyka
     cy.get('#sc-subtotal-amount-activecart').invoke('text').then((cartTotal) => {
         const cleanedCartTotal = cartTotal.slice().match(/\d+(\.\d+)?/);
-        const adjustedTotalPrice = (totalPrice + 0.01).toFixed(2); // Dodaj 1 cent i zaokrąglij do dwóch miejsc po przecinku
-        cy.wrap(adjustedTotalPrice).as(totalPriceVar); // Aktualizuj totalPriceVar
+        const adjustedTotalPrice = totalPrice.toFixed(2); // zaokrąglij do dwóch miejsc po przecinku
+        cy.wrap(cleanedCartTotal).as(totalPriceVar); // Aktualizuj totalPriceVar
         expect(parseFloat(cleanedCartTotal.toString())).to.equal(parseFloat(adjustedTotalPrice));
     });
 }

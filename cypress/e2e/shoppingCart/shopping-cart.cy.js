@@ -1,15 +1,14 @@
 import {
     addToCart, deleteAllItemsFromCart,
-    Navigate,
+    Navigate, restoreCookies,
     searchProduct,
     selectProduct
 } from "../../fixtures/amazonUtils";
-import {login} from "../../fixtures/amazonUtils";
 import {validateTotalPrice} from "../../fixtures/amazonUtils";
 
 describe('Shopping cart tests', () => {
     beforeEach(()=>{
-        login()
+        restoreCookies()
         deleteAllItemsFromCart()
     })
 

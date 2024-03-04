@@ -1,9 +1,9 @@
-import {login} from "../../fixtures/amazonUtils";
+import {restoreCookies} from "../../fixtures/amazonUtils";
 import {validateName} from "./homePage";
 
 describe('Home Page test', () => {
     beforeEach(()=>{
-        login()
+        restoreCookies()
     })
 
     it('Should validate user logged user info in Home Page', () => {
