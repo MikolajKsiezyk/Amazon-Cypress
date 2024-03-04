@@ -23,10 +23,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - run: npm install
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          working-directory: Amazon-Cypress
           browser: chrome
           config-file: cypress.config.js
           spec: ${{ steps.name.outputs.spec }}
