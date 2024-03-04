@@ -23,14 +23,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - run: cd /__w/Amazon-Cypress; pwd; ls -la
+      - run: cd /__w/Amazon-Cypress/Amazon-Cypress; pwd; ls -la
 
       - run: npm install;
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          working-directory: /__w/Amazon-Cypress
+          working-directory: Amazon-Cypress
           browser: chrome
           config-file: cypress.config.js
           spec: ${{ steps.name.outputs.spec }}
