@@ -31,3 +31,5 @@ jobs:
           browser: chrome
           config-file: cypress.config.js
           spec: ${{ steps.name.outputs.spec }}
+
+      - name
