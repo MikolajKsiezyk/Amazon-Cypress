@@ -1,10 +1,14 @@
-import {restoreCookies} from "../../fixtures/amazonUtils";
+import {login, restoreCookies} from "../../fixtures/amazonUtils";
 import {addNewAddress, checkAddress, deleteAllAddresses} from "./delivery-address-manage";
 
 describe('Home Page test', () => {
+    before(() => {
+        login()
+    })
     beforeEach(()=>{
-        restoreCookies()
-        // deleteAllAddresses()
+        cy.preserveCookieOnce()
+        cy.wait(5000)
+        cy.reload()
     })
 
     it('Should add new address and then validate it', () => {
