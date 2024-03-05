@@ -5,6 +5,7 @@ export function login(email = em,password = pswd){
     cy.get('.a-button-inner > [id="continue"]').click()
     cy.get('[id="ap_password"]').type(password)
     cy.get('[id="signInSubmit"]').click()
+    cy.url().should('include','https://www.amazon.com/?ref_=nav_ya_signin')
 }
 
 export const em = 'amazoncypress123@gmail.com';
@@ -39,14 +40,13 @@ export const Navigate = {
 
 export function saveCookies() {
     cy.getCookies().then((cookies)=>{
-        cy.writeFile('cypress/fixtures/cookies.json', '');
-        cy.writeFile('cypress/fixtures/cookies.json', JSON.stringify(cookies));
+        cy.writeFile('cookies.json', JSON.stringify(cookies));
     })
 }
 
 export function restoreCookies(){
     cy.visit("https://www.amazon.com")
-    cy.readFile('cypress/fixtures/cookies.json').then((cookies) => {
+    cy.readFile('cookies.json').then((cookies) => {
         cy.clearCookies();
         cookies.forEach((cookie) => {
             const { name, value, path, secure, httpOnly, expiry, domain, sameSite } = cookie;
@@ -61,7 +61,7 @@ export function restoreCookies(){
         });
     });
     cy.wait(5000)
-    cy.visit("https://www.amazon.com")
+    cy.reload()
 }
 
 export function searchProduct(value){
