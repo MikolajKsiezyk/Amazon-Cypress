@@ -39,6 +39,7 @@ export const Navigate = {
 
 export function saveCookies() {
     cy.getCookies().then((cookies)=>{
+        cy.writeFile('cypress/fixtures/cookies.json', '');
         cy.writeFile('cypress/fixtures/cookies.json', JSON.stringify(cookies));
     })
 }
@@ -47,7 +48,6 @@ export function restoreCookies(){
     cy.visit("https://www.amazon.com")
     cy.readFile('cypress/fixtures/cookies.json').then((cookies) => {
         cy.clearCookies();
-
         cookies.forEach((cookie) => {
             const { name, value, path, secure, httpOnly, expiry, domain, sameSite } = cookie;
             cy.setCookie(name, value, {
@@ -60,8 +60,8 @@ export function restoreCookies(){
             });
         });
     });
-    cy.wait(3000)
-    cy.reload()
+    cy.wait(5000)
+    cy.visit("https://www.amazon.com")
 }
 
 export function searchProduct(value){
