@@ -40,13 +40,13 @@ export const Navigate = {
 
 export function saveCookies() {
     cy.getCookies().then((cookies)=>{
-        cy.writeFile('cookies.json', JSON.stringify(cookies));
+        cy.writeFile('cypress/fixtures/cookies.json', JSON.stringify(cookies));
     })
 }
 
 export function restoreCookies(){
     cy.visit("https://www.amazon.com")
-    cy.readFile('cookies.json').then((cookies) => {
+    cy.readFile('cypress/fixtures/cookies.json').then((cookies) => {
         cy.clearCookies();
         cookies.forEach((cookie) => {
             const { name, value, path, secure, httpOnly, expiry, domain, sameSite } = cookie;
