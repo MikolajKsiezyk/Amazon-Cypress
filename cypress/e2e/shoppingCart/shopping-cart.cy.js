@@ -9,10 +9,11 @@ import {validateTotalPrice} from "../../fixtures/amazonUtils";
 describe('Shopping cart tests', () => {
     beforeEach(()=>{
         restoreCookies()
-        deleteAllItemsFromCart()
+        // deleteAllItemsFromCart()
     })
 
     it('Should add to cart 2 products, add item prices and compare it with total price', () => {
+        restoreCookies()
         searchProduct('test automation')
         selectProduct(0)
         addToCart()

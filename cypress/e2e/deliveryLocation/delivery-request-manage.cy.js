@@ -4,10 +4,11 @@ import {addNewAddress, checkAddress, deleteAllAddresses} from "./delivery-addres
 describe('Home Page test', () => {
     beforeEach(()=>{
         restoreCookies()
-        deleteAllAddresses()
+        // deleteAllAddresses()
     })
 
     it('Should add new address and then validate it', () => {
+        restoreCookies()
         addNewAddress('Poland','Jan Kowalski','111111111','testowa 1','1','01-391','Warsaw')
         checkAddress('Poland','Jan Kowalski','111111111','testowa 1','1','01-391','Warsaw')
     })
