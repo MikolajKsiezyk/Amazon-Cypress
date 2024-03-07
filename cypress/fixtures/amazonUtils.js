@@ -5,6 +5,7 @@ export function login(email = em,password = pswd){
     cy.get('.a-button-inner > [id="continue"]').click()
     cy.get('[id="ap_password"]').type(password)
     cy.get('[id="signInSubmit"]').click()
+    cy.url().should('include','https://www.amazon.com/?ref_=nav_ya_signin')
 }
 
 export const em = 'amazoncypress123@gmail.com';
