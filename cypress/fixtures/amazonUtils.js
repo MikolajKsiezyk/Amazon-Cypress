@@ -1,9 +1,5 @@
 export function login(email = em,password = pswd){
-    cy.visit("https://www.amazon.com", {
-        headers: {
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-        }
-    })
+    cy.visit("https://www.amazon.com")
     cy.get('[data-nav-ref="nav_ya_signin"]').click()
     cy.get('[id="ap_email"]').type(email)
     cy.get('.a-button-inner > [id="continue"]').click()
@@ -113,7 +109,7 @@ export function validateTotalPrice(itemCount, totalPriceVar) {
     // Pobierz cenę całego koszyka
     cy.get('#sc-subtotal-amount-activecart').invoke('text').then((cartTotal) => {
         const cleanedCartTotal = cartTotal.slice().match(/\d+(\.\d+)?/);
-        const adjustedTotalPrice = totalPrice.toFixed(2); // odejmij 1 euro centa i zaokrąglij do dwóch miejsc po przecinku
+        const adjustedTotalPrice = totalPrice.toFixed(2); // zaokrąglij do dwóch miejsc po przecinku
         cy.wrap(cleanedCartTotal).as(totalPriceVar); // Aktualizuj totalPriceVar
         expect(parseFloat(cleanedCartTotal.toString())).to.equal(parseFloat(adjustedTotalPrice));
     });
