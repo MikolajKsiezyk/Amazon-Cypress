@@ -1,5 +1,5 @@
 import {restoreCookies} from "../../fixtures/amazonUtils";
-import {validateName} from "./homePage";
+import {changeLanguageAndValidate, validateName} from "./homePage";
 
 describe('Home Page tests', () => {
     beforeEach(()=>{
@@ -8,5 +8,16 @@ describe('Home Page tests', () => {
 
     it('Should validate user logged user info in Home Page', () => {
         validateName('Jan')
+    })
+
+    it('Should change language and validate it', () => {
+        changeLanguageAndValidate('ES','Hola')
+        changeLanguageAndValidate('AR','مرحباً')
+        changeLanguageAndValidate('DE','Hallo')
+        changeLanguageAndValidate('HE','שלום')
+        changeLanguageAndValidate('KO','안녕하십니까')
+        changeLanguageAndValidate('PT','Olá')
+        changeLanguageAndValidate('ZH','您好')
+        changeLanguageAndValidate('EN','Hello')
     })
 })
