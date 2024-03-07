@@ -1,0 +1,42 @@
+name: Save Cookies
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to push cookies:"
+        type: string
+        default: 'main'
+        required: true
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    container:
+      image: cypress/browsers:node-20.11.0-chrome-121.0.6167.184-1-ff-123.0-edge-121.0.2277.128-1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - run: npm install
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          config-file: cypress.config.js
+          spec: cypress/e2e/login-save-cookies.cy.js
+
+      - name: Commit and Push Changes
+        run: |
+          git add .
+          git commit -m "Save cookies to file"
+          git push origin ${{ steps.name.outputs.branch }}
+
+      - name: Upload screenshots on failure
+        uses: actions/upload-artifact@v4.3.1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
