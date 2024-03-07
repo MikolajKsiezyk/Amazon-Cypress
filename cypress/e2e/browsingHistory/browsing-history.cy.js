@@ -1,5 +1,5 @@
 import {clearHistory, validateItemHistory} from "./browsing-history";
-import {Navigate, restoreCookies} from "../../fixtures/amazonUtils";
+import {restoreCookies} from "../../fixtures/amazonUtils";
 
 
 describe('Home Page tests', () => {
