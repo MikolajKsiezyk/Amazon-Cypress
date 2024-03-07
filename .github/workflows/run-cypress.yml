@@ -6,7 +6,7 @@ on:
       spec:
         description: "Test specification:"
         type: string
-        default: 'cypress/e2e/**/*cy.js'
+        default: 'cypress/**/*.cy.js,!cypress/e2e/login-save-cookies.cy.js'
         required: true
 
 jobs:
