@@ -1,9 +1,15 @@
-import {Navigate} from "../../fixtures/amazonUtils";
+import {Navigate, pswd} from "../../fixtures/amazonUtils";
 
 export function addNewAddress(country, name, phone, street, apartment, postcode, city) {
     Navigate.deliveryLocation.here()
     cy.wait(3000)
     cy.get('[role="navigation"]').contains('Manage address book').click()
+        .then((loginRequest)=> {
+            if(loginRequest.find('#authportal-center-section').length) {
+                cy.get('input#ap_password').type(pswd)
+                cy.get('#signInSubmit').click()
+            }
+        })
     cy.get('[id="ya-myab-address-add-link"]').click()
     cy.get('#address-ui-widgets-countryCode').click()
     cy.get('body').wait(1000).type('Poland{enter}').wait(2000)
