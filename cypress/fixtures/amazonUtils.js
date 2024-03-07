@@ -46,9 +46,8 @@ export function saveCookies() {
 
 export function restoreCookies(){
     cy.visit("https://www.amazon.com")
-    cy.fixture('cookies.json').then((cookies) => {
+    cy.readFile('cypress/fixtures/cookies.json').then((cookies) => {
         cy.clearCookies();
-
         cookies.forEach((cookie) => {
             const { name, value, path, secure, httpOnly, expiry, domain, sameSite } = cookie;
             cy.setCookie(name, value, {
@@ -61,7 +60,7 @@ export function restoreCookies(){
             });
         });
     });
-    cy.wait(3000)
+    cy.wait(5000)
     cy.reload()
 }
 

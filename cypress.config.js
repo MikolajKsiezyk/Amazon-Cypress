@@ -12,7 +12,6 @@ module.exports = defineConfig({
   retries: 2,
   defaultCommandTimeout: 20000,
   video: true,
-  videoCompression: 32,
   screenshotOnRunFailure: true,
   viewportWidth: 1920,
   viewportHeight: 1080,

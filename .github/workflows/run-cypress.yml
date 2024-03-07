@@ -6,7 +6,7 @@ on:
       spec:
         description: "Test specification:"
         type: string
-        default: 'cypress/e2e/**/*cy.js'
+        default: 'cypress/**/*.cy.js,!cypress/e2e/login-save-cookies.cy.js'
         required: true
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
         with:
           browser: chrome
           config-file: cypress.config.js
-          spec: ${{ steps.name.outputs.spec }}
+          spec: 'cypress/**/*.cy.js,!cypress/e2e/login-save-cookies.cy.js'
 
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v4.3.1
