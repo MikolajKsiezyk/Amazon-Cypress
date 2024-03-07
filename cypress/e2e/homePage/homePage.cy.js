@@ -1,7 +1,7 @@
 import {restoreCookies} from "../../fixtures/amazonUtils";
 import {validateName} from "./homePage";
 
-describe('Home Page test', () => {
+describe('Home Page tests', () => {
     beforeEach(()=>{
         restoreCookies()
     })

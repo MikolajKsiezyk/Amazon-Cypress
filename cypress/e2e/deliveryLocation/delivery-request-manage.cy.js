@@ -1,7 +1,7 @@
 import {restoreCookies} from "../../fixtures/amazonUtils";
 import {addNewAddress, checkAddress, deleteAllAddresses} from "./delivery-address-manage";
 
-describe('Home Page test', () => {
+describe('Delivery location tests', () => {
     beforeEach(()=>{
         restoreCookies()
         deleteAllAddresses()
