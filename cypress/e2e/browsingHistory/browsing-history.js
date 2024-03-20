@@ -15,7 +15,7 @@ export function validateItemHistory(searchVal) {
     searchProduct(searchVal)
     selectProduct().then((productTitle) => {
         cy.wait(15000)
-        cy.reload
+        cy.reload()
         cy.wait(15000)
         Navigate.homePage.here()
         Navigate.browsingHistory.here()
