@@ -15,6 +15,8 @@ export function validateItemHistory(searchVal) {
     searchProduct(searchVal)
     selectProduct().then((productTitle) => {
         cy.wait(15000)
+        cy.reload
+        cy.wait(15000)
         Navigate.homePage.here()
         Navigate.browsingHistory.here()
         cy.get('div.p13n-sc-truncate-fallback').eq(0).should('have.text',productTitle)

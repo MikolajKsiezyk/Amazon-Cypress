@@ -88,7 +88,7 @@ export function selectProduct(){
 }
 
 export function addToCart(){
-    cy.get('[id="add-to-cart-button"]').click()
+    cy.get('[id="add-to-cart-button"]').eq(0).click()
 }
 
 export function getPrice(selector, price) {
