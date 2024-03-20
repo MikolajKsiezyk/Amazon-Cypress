@@ -1,6 +1,6 @@
 import {Navigate, pswd} from "../../fixtures/amazonUtils";
 
-export function addNewAddress(country, name, phone, street, apartment, postcode, city) {
+export function addNewAddressAndValidate(country, name, phone, street, apartment, postcode, city) {
     Navigate.deliveryLocation.here()
     cy.wait(3000)
     cy.get('[role="navigation"]').contains('Manage address book').click()
@@ -21,9 +21,7 @@ export function addNewAddress(country, name, phone, street, apartment, postcode,
     cy.get('.a-dropdown-prompt:contains("Choose city or suburb")').click()
     cy.get('.a-popover-inner').find(`.a-dropdown-link:contains("${city}")`).click()
     cy.get('[id="address-ui-widgets-form-submit-button"]').click()
-}
 
-export function checkAddress(country, name, phone, street, apartment, postcode, city){
     cy.get('#address-ui-widgets-FullName').eq(0).should('contain.text',name)
     cy.get('[id="address-ui-widgets-AddressLineTwo"]').eq(0).should('contain.text',apartment)
     cy.get('[id="address-ui-widgets-PostalCodeCity"]').eq(0).should('contain.text',`${postcode} ${city}`)

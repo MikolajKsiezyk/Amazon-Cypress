@@ -6,7 +6,7 @@ describe('Home Page tests', () => {
         restoreCookies()
     })
 
-    it('Should validate user logged user info in Home Page', () => {
+    it('Should validate logged user, user info in Home Page', () => {
         validateName('Jan')
     })
 

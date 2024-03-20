@@ -70,7 +70,6 @@ export function restoreCookies(){
             });
         });
     });
-    cy.wait(5000)
     cy.reload()
 }
 
