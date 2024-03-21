@@ -16,7 +16,7 @@ describe('Shopping cart tests', () => {
         searchProduct('test automation')
         selectProduct(0)
         addToCart()
-        searchProduct('Jeans')
+        searchProduct('SAMSUNG Galaxy S23')
         selectProduct(0)
         addToCart()
         Navigate.shoppingCart.here()
