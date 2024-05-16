@@ -13,7 +13,7 @@ describe('Shopping cart tests', () => {
     })
 
     it('Should add to cart 2 products, add item prices and compare it with total price', () => {
-        searchProduct('test automation')
+        searchProduct('test automation fundamentals')
         selectProduct(0)
         addToCart()
         searchProduct('SAMSUNG Galaxy S23')
