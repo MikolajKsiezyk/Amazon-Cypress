@@ -8,8 +8,8 @@ export function login(email = em,password = pswd){
     cy.url().should('include','https://www.amazon.com/?ref_=nav_ya_signin')
 }
 
-export const em = 'amazoncypress123@gmail.com';
-export const pswd = 'ZAQ1@wsx';
+export const em = 'enter your email here';
+export const pswd = 'enter your password here';
 
 export const Navigate = {
     homePage: {
