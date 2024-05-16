@@ -35,6 +35,16 @@ export const Navigate = {
         here(){
             cy.get('#nav-global-location-popover-link').click()
         }
+    },
+    languageOptions: {
+        here() {
+            cy.get('#icp-nav-flyout').click()
+        }
+    },
+    browsingHistory: {
+        here() {
+            cy.get('#nav-recently-viewed').click()
+        }
     }
 }
 
@@ -60,7 +70,6 @@ export function restoreCookies(){
             });
         });
     });
-    cy.wait(5000)
     cy.reload()
 }
 
@@ -72,11 +81,14 @@ export function searchProduct(value){
 
 export function selectProduct(){
     cy.get('[data-component-type="s-product-image"]:eq(0)').click()
-
+    return cy.get('#productTitle').invoke('text').then((title) => {
+        const trimmedTitle = title.trim();
+        return cy.wrap(trimmedTitle)
+    })
 }
 
 export function addToCart(){
-    cy.get('[id="add-to-cart-button"]').click()
+    cy.get('[id="add-to-cart-button"]').eq(0).click().wait(6000)
 }
 
 export function getPrice(selector, price) {

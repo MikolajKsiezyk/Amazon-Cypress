@@ -13,10 +13,10 @@ describe('Shopping cart tests', () => {
     })
 
     it('Should add to cart 2 products, add item prices and compare it with total price', () => {
-        searchProduct('test automation')
+        searchProduct('test automation fundamentals')
         selectProduct(0)
         addToCart()
-        searchProduct('watch')
+        searchProduct('SAMSUNG Galaxy S23')
         selectProduct(0)
         addToCart()
         Navigate.shoppingCart.here()
